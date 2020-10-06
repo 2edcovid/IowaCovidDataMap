@@ -42,6 +42,8 @@ h6 {
 #map {
   position: fixed;
   bottom: 0px;
+  width: 75%;
+  /* height: 95%; */
   top: 0px;
   right: 0px;
   z-index: 1;
@@ -55,6 +57,23 @@ h6 {
   left:0px;
 }
 
+#header {
+  position: fixed;
+  width: 60%;
+  height: 12%;
+  bottom: 10px;
+  right: 10px;
+  /* padding: 10px; */
+  z-index: 1;
+}
+
+.value-time {
+  font-weight: bold;
+  font-family: "Montserrat";
+  font-size: 14px;
+  color: black;
+}
+
 .svg-content {
   border-radius: 3px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
@@ -64,6 +83,17 @@ h6 {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.slider-content {
+  bottom: 10px;
+  right: 10px;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
+  line-height: 18px;
+  background-color: #fff;
+  display: inline-block;
+  position: absolute;
 }
 
 .svg-title {

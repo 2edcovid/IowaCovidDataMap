@@ -3,7 +3,7 @@ function getTitle() {
     position: 'topleft'
   });
   title.onAdd = function(map) {
-    return populateTitle();
+    return L.DomUtil.create('div', 'title');
   };
   return title;
 };
@@ -11,8 +11,16 @@ function getTitle() {
 function populateTitle() {
   var title = getDateString(fallBackToYesterday(getGeoJsonURL())) + " as of 11 am";
   var div = L.DomUtil.create('div', 'title')
+
+  // <div class="slidecontainer">
+  // <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+  //   </div>
   var labels = ["<h6>" + title +"</h6>"];
   div.innerHTML = labels.join('<br>');
+
+  var slider = L.DomUtil.create('div', 'slider', div);
+  L.DomUtil.addClass(slider, 'slidecontainer');
+  slider.innerHTML = '<input type="range" min="1" max="100" value="50" class="slider" id="myRange">';
   return div;
 };
 
