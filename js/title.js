@@ -18,6 +18,11 @@ function populateTitle() {
 
 function getDateString() {
   var d = new Date();
+  
+  if (d.getMonth() < 10) {
+    d.setHours(d.getHours() - 1)
+  }
+  
   if (d.getHours() <= 11) {
     d.setDate(d.getDate() - 1); 
   }
