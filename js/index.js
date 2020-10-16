@@ -83,7 +83,7 @@ function drawMap(err, corona) {
 
   $(window).on("resize", function() {
     var mapDiv = d3.select("#map");
-    if ($(window).width() < 920) { 
+    if ($(window).width() <= 980) { 
       mapDiv.style("width", 100 + '%');
     }
     else {
