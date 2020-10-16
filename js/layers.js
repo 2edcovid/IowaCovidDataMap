@@ -57,7 +57,7 @@ function styleFeature(color) {
     color: "grey",
     weight: 1,
     fillColor: color,
-    fillOpacity: 1
+    fillOpacity: .75
   };
 };
  

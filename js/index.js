@@ -82,6 +82,14 @@ function drawMap(err, corona) {
   map.fitBounds(categories[defaultCategoryTitle].category.layer.getBounds());
 
   $(window).on("resize", function() {
+    var mapDiv = d3.select("#map");
+    if ($(window).width() < 920) { 
+      mapDiv.style("width", 100 + '%');
+    }
+    else {
+      mapDiv.style("width", 75 + '%');
+    }
+    
     map.invalidateSize();
     map.fitBounds(categories[defaultCategoryTitle].category.layer.getBounds());
     console.log($(window).width())
@@ -90,6 +98,7 @@ function drawMap(err, corona) {
     if (map.getZoom() < 3) {
       map.removeControl(curLegend);
     }
+
   }).trigger("resize");
 
 }; //end drawMap function
