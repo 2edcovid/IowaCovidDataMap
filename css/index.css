@@ -43,9 +43,9 @@ h6 {
 #map {
   position: fixed;
   bottom: 0px;
-  width: 75%;
   top: 0px;
   right: 0px;
+  z-index: 1;
 }
 
 /* Set map parameters */
@@ -55,7 +55,6 @@ h6 {
   width: 25%;
   top: 0px;
   left:0px;
-  z-index: 1;
 }
 
 /* .container { */
