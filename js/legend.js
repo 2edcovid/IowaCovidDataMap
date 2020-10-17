@@ -1,21 +1,21 @@
-function getLegend(title, stop) {
+function getLegend(title, stop, total) {
   var legend = L.control({
     position: 'bottomleft'
   });
   legend.onAdd = function(map) {
-    return populateLegend(stop, title);
+    return populateLegend(stop, title, total);
   };
   return legend;
 };
  
-function populateLegend(stops, title) {
+function populateLegend(stops, title, total) {
   var div = L.DomUtil.create('div', 'info legend')
   var grades = [];
   for (var i = 0; i < stops.length; i++) {
     var grade = ss.min(stops[i]) ? ss.min(stops[i]) : 0;
     grades.push(grade)
   }
-  var labels = ["<h6>" + title +"</h6>"];
+  var labels = ["<h6>" + title + ": " + total + "</h6>"];
   var fixed = title.includes('Percent') ? 2 : 0;
   // loop through our intervals and generate a label with a colored square for each interval
   for (var i = 0; i < grades.length; i++) {
