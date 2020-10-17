@@ -16,7 +16,7 @@ function createMapCategory(layerTitle, layerName, layerBreaks, corona) {
     var layerLabels = [];
     var layerStops = getStops(layerName, layerBreaks, corona.features);
     var layerLayer = getLayer(corona, layerName, layerStops, layerTitle, layerTotal, layerLabels);
-    var layerLegend = getLegend(layerTitle, layerStops);
+    var layerLegend = getLegend(layerTitle, layerStops, layerTotal);
     var layerChart = getChartContents(layerName, corona.features, layerStops, layerTitle, layerTotal);
   
     var mapCategory = {
