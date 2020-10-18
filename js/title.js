@@ -1,30 +1,61 @@
-function getTitle() {
-  var title = L.control({
-    position: 'topleft'
+var StartDate = new Date(2020, 2, 8);
+var Today = getDate(fallBackToYesterday(getGeoJsonURL()));
+var DaysSinceStart = Math.trunc((Today.getTime() - StartDate.getTime())  / (1000 * 3600 * 24)) + 1;
+
+var curDateString = getDateString(Today);
+var changed = false;
+
+// Time
+var dataTime = d3.range(0, DaysSinceStart).map(function(d) {
+  return new Date(2020, 2, 8 + d);
+});
+
+var sliderTime = d3
+  .sliderBottom()
+  .min(d3.min(dataTime))
+  .max(d3.max(dataTime))
+  .step(1000 * 60 * 60 * 24)
+  .width(650)
+  .height(80)
+  .tickFormat(d3.timeFormat('%Y %m %d'))
+  .tickValues(dataTime)
+  .default(Today)
+  .on('onchange', val => {
+    d3.select('.value-time').text(getTitleText(sliderTime));
+    if (getDateString(val) != curDateString) {
+      changed = true;
+      curDateString = getDateString(val);
+      console.log(curDateString);
+      //trigger reload
+    }
+    else {
+      changed = false;
+    }
   });
-  title.onAdd = function(map) {
-    return L.DomUtil.create('div', 'title');
-  };
-  return title;
-};
- 
-function populateTitle() {
-  var title = getDateString(fallBackToYesterday(getGeoJsonURL())) + " as of 11 am";
-  var div = L.DomUtil.create('div', 'title')
 
-  // <div class="slidecontainer">
-  // <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-  //   </div>
-  var labels = ["<h6>" + title +"</h6>"];
-  div.innerHTML = labels.join('<br>');
+var gTime = d3
+  .select('#header')
+  .append('svg')
+  .attr("preserveAspectRatio", "xMinYMin meet")
+  .attr("viewBox", "0 0 " + 720 + " " + 50)
+  .classed("slider-content", true)
+  .append('g')
+  .attr('transform', 'translate(30,30)');
 
-  var slider = L.DomUtil.create('div', 'slider', div);
-  L.DomUtil.addClass(slider, 'slidecontainer');
-  slider.innerHTML = '<input type="range" min="1" max="100" value="50" class="slider" id="myRange">';
-  return div;
-};
+gTime.append("text")
+  .attr("class", "value-time")
+  .attr("y", -10)
+  .text(getTitleText(sliderTime));
 
-function getDateString(yesterday=false) {
+gTime.call(sliderTime);
+
+function getTitleText(sliderTime) {
+  var titleText = `Data as of ${d3.timeFormat('%m/%d/%Y')(sliderTime.value())}`;
+  return titleText;
+}
+
+
+function getDate(yesterday=false) {
   var d = new Date();
   
   if (d.getMonth() < 10) {
@@ -36,7 +67,11 @@ function getDateString(yesterday=false) {
     d.setDate(d.getDate() - 1); 
   }
 
-  var dateString = d.getFullYear() + "-" + `${d.getMonth() + 1}`.padStart(2, "0") + "-" + `${d.getDate()}`.padStart(2, "0");
+  return d;
+}
+
+function getDateString(date) {
+  var dateString = date.getFullYear() + "-" + `${date.getMonth() + 1}`.padStart(2, "0") + "-" + `${date.getDate()}`.padStart(2, "0");
   return dateString; 
 }
 
@@ -58,9 +93,11 @@ function fallBackToYesterday(url) {
 function getGeoJsonURL() {
   var prefix = 'https://raw.githubusercontent.com/2edcovid/CovidDataAutomation/data/historical/data_file_';
   var ext = '.geojson';
-  var url = prefix + getDateString() + ext;
+  var date = getDate();
+  var url = prefix + getDateString(date) + ext;
 
-  url = prefix + getDateString(fallBackToYesterday(url)) + ext;
+  date = getDate(fallBackToYesterday(url))
+  url = prefix + getDateString(date) + ext;
   
   return url;
 }
