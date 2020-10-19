@@ -3,7 +3,6 @@ var Today = getDate(fallBackToYesterday(getGeoJsonURL()));
 var DaysSinceStart = Math.trunc((Today.getTime() - StartDate.getTime())  / (1000 * 3600 * 24)) + 1;
 
 var curDateString = getDateString(Today);
-var changed = false;
 
 // Time
 var dataTime = d3.range(0, DaysSinceStart).map(function(d) {
@@ -23,13 +22,9 @@ var sliderTime = d3
   .on('onchange', val => {
     d3.select('.value-time').text(getTitleText(sliderTime));
     if (getDateString(val) != curDateString) {
-      changed = true;
       curDateString = getDateString(val);
-      console.log(curDateString);
-      //trigger reload
-    }
-    else {
-      changed = false;
+      resetMap();
+      loadMap(getGeoJsonURL(curDateString));
     }
   });
 
@@ -90,14 +85,21 @@ function fallBackToYesterday(url) {
   return ret;
 }
 
-function getGeoJsonURL() {
+function getGeoJsonURL(overrideDate=null) {
   var prefix = 'https://raw.githubusercontent.com/2edcovid/CovidDataAutomation/data/historical/data_file_';
   var ext = '.geojson';
+  var url = '';
   var date = getDate();
-  var url = prefix + getDateString(date) + ext;
 
-  date = getDate(fallBackToYesterday(url))
-  url = prefix + getDateString(date) + ext;
-  
+  if (overrideDate) {
+    url = prefix + overrideDate + ext;
+  }
+  else {
+    url = prefix + getDateString(date) + ext;
+    date = getDate(fallBackToYesterday(url))
+    url = prefix + getDateString(date) + ext;
+  }
+
+  console.log(url)
   return url;
 }

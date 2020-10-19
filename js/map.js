@@ -31,8 +31,10 @@ function drawMap(err, corona) {
   //define layers
   baselayers = {};
 
-  var title = getTitle();
-  title.addTo(map);
+//provide instructions for drawing the map
+function drawMap(err, corona) {
+  //define layers
+  baselayers = {};
  
   var defaultCategoryTitle = 'Confirmed Cases';
   categories = new Map();

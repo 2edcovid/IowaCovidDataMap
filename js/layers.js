@@ -12,6 +12,8 @@ function createMapCategory(layerTitle, layerName, layerBreaks, corona) {
   }
   // console.log(layerTotal)
 
+  console.log(layerTotal)
+
   if (layerTotal > 0) {
     var layerLabels = [];
     var layerStops = getStops(layerName, layerBreaks, corona.features);
@@ -57,7 +59,7 @@ function styleFeature(color) {
     color: "grey",
     weight: 1,
     fillColor: color,
-    fillOpacity: .75
+    fillOpacity: 1
   };
 };
  
