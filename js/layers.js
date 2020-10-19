@@ -12,7 +12,7 @@ function createMapCategory(layerTitle, layerName, layerBreaks, corona) {
   }
   // console.log(layerTotal)
 
-  console.log(layerTotal)
+  // console.log(layerTotal)
 
   if (layerTotal > 0) {
     var layerLabels = [];
