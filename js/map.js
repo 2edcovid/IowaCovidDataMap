@@ -29,7 +29,7 @@ function drawMap(err, corona) {
   for (var key in categories) {
     if (categories.hasOwnProperty(key)) {    
 
-        console.log(key, categories[key]);
+        // console.log(key, categories[key]);
         categories[key].category = createMapCategory(key, categories[key].name, 9, corona);
         if (categories[key].category) {
           baselayers[ [key] ] = categories[key].category.layer;

@@ -2,7 +2,7 @@
 function createMapCategory(layerTitle, layerName, layerBreaks, corona) {
   var mapCategory = null;
 
-  console.log(layerName)
+  // console.log(layerName)
   if (layerName.includes("Percent"))
   {
     previousTotal = getTotal(layerName.replace("Percent", ""), corona.features);
@@ -10,7 +10,7 @@ function createMapCategory(layerTitle, layerName, layerBreaks, corona) {
   } else {
     var layerTotal = getTotal(layerName, corona.features);
   }
-  console.log(layerTotal)
+  // console.log(layerTotal)
 
   if (layerTotal > 0) {
     var layerLabels = [];

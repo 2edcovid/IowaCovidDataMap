@@ -1,4 +1,5 @@
 function getCaseColor(stops, d) {
+  if (stops.length == 9) {
    return d >= ss.min(stops[8]) ? '#651d27' :
       d >= ss.min(stops[7]) ? '#8b1d2c' :
       d >= ss.min(stops[6]) ? '#ae2a2f' :
@@ -9,6 +10,8 @@ function getCaseColor(stops, d) {
       d >= ss.min(stops[1]) ? '#fce2d5' :
       d >= ss.min(stops[0]) ? '#fdf4f0' :
       'rgba(0,0,0,0.0)';
+  }
+  return 'rgba(0,0,0,0.0)';
 };
 
 // Add a function to style the counties by their confirmed deaths (ck means)
