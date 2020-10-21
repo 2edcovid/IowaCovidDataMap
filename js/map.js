@@ -30,6 +30,9 @@ function resetMap() {
 function drawMap(err, corona) {
   //define layers
   baselayers = {};
+
+  var title = getTitle();
+  title.addTo(map);
  
   var defaultCategoryTitle = 'Confirmed Cases';
   categories = new Map();
@@ -87,9 +90,8 @@ function drawMap(err, corona) {
   map.fitBounds(categories[defaultCategoryTitle].category.layer.getBounds());
 
   map.on('zoomstart zoom zoomend', function(ev){
-    console.log('Zoom level: ' + map.getZoom())
+    // console.log('Zoom level: ' + map.getZoom())
     var multiplier = (map.getZoom() - 5)/2;
-    console.log('Zoom percent:' + multiplier)
     d3.selectAll("h3").style("font-size", multiplier * 1.2 + "em")
     d3.selectAll("h2").style("font-size", multiplier * 1.2 + "em")
   })
