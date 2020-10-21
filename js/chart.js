@@ -18,7 +18,6 @@ function formatName(data, property) {
   return data.map(function(d) { return d.properties.Name + "(" + d.properties[property] + ")"; });
 };
 
-
 function getFillColor(stops, d, property) {
   return getCaseColor(stops, d.properties[property]);
 };
