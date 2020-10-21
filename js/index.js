@@ -34,7 +34,7 @@ function drawMap(err, corona) {
   categories['Percent Cases'] = {name: 'PercentConfirmed', category: null};
   categories['Confirmed Deaths'] = {name: 'Deaths', category: null};
   categories['Percent Deaths'] = {name: 'PercentDeaths', category: null};
-  categories['Esitmated Active'] = {name: 'Active', category: null};
+  categories['Estimated Active'] = {name: 'Active', category: null};
   categories['Percent Active'] = {name: 'PercentActive', category: null};
   categories['Assumed Recovered'] = {name: 'Recovered', category: null};
   categories['Percent Recovered'] = {name: 'PercentRecovered', category: null};
