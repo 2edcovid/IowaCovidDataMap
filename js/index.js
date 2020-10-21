@@ -1,10 +1,13 @@
 // initialize our map
-var map = L.map('map', { zoomControl: false });
+var map = L.map('map', { 
+  minZoom: 7,
+  maxZoom: 11,
+  zoomControl: false,
+  zoomSnap: 0.25
+ });
 
 //add esri topo basemap
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {  
-  maxZoom: 11,
-  minZoom: 7
 }).addTo(map);
 
 
