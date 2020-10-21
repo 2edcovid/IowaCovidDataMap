@@ -82,7 +82,6 @@ function populateChartContents(property, data, stops, title, total) {
             .enter()
             .append('rect');
 
-
   bar.attr("class", "bar")
     .attr("fill", function(d) { return getFillColor(stops, d, property); } )
     .attr("width", function(d) { return getWidth(x, d, property); } )
@@ -106,14 +105,4 @@ function populateChartContents(property, data, stops, title, total) {
     .attr("class", "svg-title")
     .attr("y", 10)
     .text(title + ": " + total);
-}
-
-function getChart() {
-  var chart = L.control({
-    position: 'bottomright'
-  });
-  chart.onAdd = function(map) {
-    return L.DomUtil.create('div', 'container');
-  }
-  return chart;
 }

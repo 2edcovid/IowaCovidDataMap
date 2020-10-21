@@ -16,23 +16,20 @@ function populateTitle() {
   return div;
 };
 
-function getDateString(yesterday=false) {
+function getDate(yesterday=false) {
   var d = new Date();
-  
   if (d.getMonth() < 10) {
     d.setHours(d.getHours() + 1)
   }
-  
   if (d.getHours() <= 11 || yesterday) {
-    console.log('yesterday')
-    d.setDate(d.getDate() - 1); 
+    d.setDate(d.getDate() - 1);
   }
+  return d;
+}
 
-  console.log(d.getMinutes())
-
-  var dateString = d.getFullYear() + "-" + `${d.getMonth() + 1}`.padStart(2, "0") + "-" + `${d.getDate()}`.padStart(2, "0");
-  console.log(dateString)
-  return dateString; 
+function getDateString(date) {
+  var dateString = date.getFullYear() + "-" + `${date.getMonth() + 1}`.padStart(2, "0") + "-" + `${date.getDate()}`.padStart(2, "0");
+  return dateString;
 }
 
 function fallBackToYesterday(url) {
@@ -53,9 +50,8 @@ function fallBackToYesterday(url) {
 function getGeoJsonURL() {
   var prefix = 'https://raw.githubusercontent.com/2edcovid/CovidDataAutomation/data/historical/data_file_';
   var ext = '.geojson';
-  var url = prefix + getDateString() + ext;
-
-  url = prefix + getDateString(fallBackToYesterday(url)) + ext;
-  
-  return url;
+  var date = getDate();
+  var url = prefix + getDateString(date) + ext;	  
+  date = getDate(fallBackToYesterday(url))
+  url = prefix + getDateString(date) + ext;
 }

@@ -25,12 +25,10 @@ function drawMap(err, corona) {
 
   //define layers
   var baselayers = {};
-  var chart = getChart();
 
   var title = getTitle();
   title.addTo(map);
  
-
   var defaultCategoryTitle = 'Confirmed Cases';
   var categories = new Map();
   categories[defaultCategoryTitle] = {name: 'Confirmed', category: null};
@@ -46,7 +44,6 @@ function drawMap(err, corona) {
   categories['Confirmed Hospitalized'] = {name: 'Hospitalized', category: null};
   categories['Percent Hospitalized'] = {name: 'PercentHospitalized', category: null};
 
-
   for (var key in categories) {
     if (categories.hasOwnProperty(key)) {    
 
@@ -58,13 +55,11 @@ function drawMap(err, corona) {
     }
   }
 
-
   //send the layers to the layer control
   L.control.layers(baselayers, null, {
     collapsed: true,
   }).addTo(map);
 
-  chart.addTo(map);
   categories[defaultCategoryTitle].category.layer.addTo(map);
 
   curLegend = categories[defaultCategoryTitle].category.legend;
