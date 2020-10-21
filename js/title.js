@@ -24,14 +24,12 @@ function getDateString(yesterday=false) {
   }
   
   if (d.getHours() <= 11 || yesterday) {
-    console.log('yesterday')
+    // console.log('yesterday')
     d.setDate(d.getDate() - 1); 
   }
 
-  console.log(d.getMinutes())
 
   var dateString = d.getFullYear() + "-" + `${d.getMonth() + 1}`.padStart(2, "0") + "-" + `${d.getDate()}`.padStart(2, "0");
-  console.log(dateString)
   return dateString; 
 }
 
