@@ -1,10 +1,13 @@
 // initialize our map
-var map = L.map('map', { zoomControl: false });
+var map = L.map('map', { 
+  minZoom: 7,
+  maxZoom: 11,
+  zoomControl: false,
+  zoomSnap: 0.25
+ });
 
 //add esri topo basemap
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {  
-  maxZoom: 11,
-  minZoom: 7
 }).addTo(map);
 
 
@@ -34,7 +37,7 @@ function drawMap(err, corona) {
   categories['Percent Cases'] = {name: 'PercentConfirmed', category: null};
   categories['Confirmed Deaths'] = {name: 'Deaths', category: null};
   categories['Percent Deaths'] = {name: 'PercentDeaths', category: null};
-  categories['Esitmated Active'] = {name: 'Active', category: null};
+  categories['Estimated Active'] = {name: 'Active', category: null};
   categories['Percent Active'] = {name: 'PercentActive', category: null};
   categories['Assumed Recovered'] = {name: 'Recovered', category: null};
   categories['Percent Recovered'] = {name: 'PercentRecovered', category: null};
@@ -79,6 +82,13 @@ function drawMap(err, corona) {
 
   //fit the map to the extent of the cases layer upon drawing
   map.fitBounds(categories[defaultCategoryTitle].category.layer.getBounds());
+
+  map.on('zoomstart zoom zoomend', function(ev){
+    console.log('Zoom level: ' + map.getZoom())
+    var multiplier = (map.getZoom() - 5)/2;
+    d3.selectAll("h3").style("font-size", multiplier * 1.2 + "em")
+    d3.selectAll("h2").style("font-size", multiplier * 1.2 + "em")
+  })
 
   $(window).on("resize", function() {
     var mapDiv = d3.select("#map");
