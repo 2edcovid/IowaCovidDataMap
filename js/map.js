@@ -1,18 +1,39 @@
+var categories = null;
+var curLegend = null;
+var curLabels = null;
+var curChart = null;
+var layerControl = null;
+var baselayers = {};
+
+function resetMap() {
+  if (categories && curLegend && curLabels && curChart && layerControl) {
+    removeCurrentLayer(map, curChart, curLegend, curLabels);
+
+    for (var key in categories) {
+      if (categories.hasOwnProperty(key && baselayers[ [key] ])) {    
+        layerControl.removeLayer(baselayers[ [key] ])
+      }
+    }
+
+    map.removeControl(layerControl);
+    categories = null;
+    curLegend = null;
+    curLabels = null;
+    curChart = null;
+    layerControl = null;
+    baselayers = {};
+  }
+
+}
+
 //provide instructions for drawing the map
 function drawMap(err, corona) {
-
-  var curLegend = null;
-  var curLabels = null;
-  var curChart = null;
-
   //define layers
-  var baselayers = {};
-
-  var title = getTitle();
-  title.addTo(map);
+  baselayers = {};
  
   var defaultCategoryTitle = 'Confirmed Cases';
-  var categories = new Map();
+  categories = new Map();
+
   categories[defaultCategoryTitle] = {name: 'Confirmed', category: null};
   categories['Percent Cases'] = {name: 'PercentConfirmed', category: null};
   categories['Confirmed Deaths'] = {name: 'Deaths', category: null};
@@ -38,10 +59,12 @@ function drawMap(err, corona) {
   }
 
   //send the layers to the layer control
-  L.control.layers(baselayers, null, {
+  layerControl = L.control.layers(baselayers, null, {
     collapsed: true,
-  }).addTo(map);
+  });
+  layerControl.addTo(map);
 
+  
   categories[defaultCategoryTitle].category.layer.addTo(map);
 
   curLegend = categories[defaultCategoryTitle].category.legend;
@@ -50,7 +73,10 @@ function drawMap(err, corona) {
 
   // when the user changes the baselayer, switch the legend and labels
   map.on('baselayerchange', function(eventLayer) {
-    removeCurrentLayer(this, curChart, curLegend, curLabels);
+    if (curChart && curLegend && curLabels) {
+      removeCurrentLayer(this, curChart, curLegend, curLabels);
+    }
+    
     curLegend = categories[eventLayer.name].category.legend;
     curLabels = categories[eventLayer.name].category.labels;
     curChart = categories[eventLayer.name].category.chart;
@@ -61,8 +87,9 @@ function drawMap(err, corona) {
   map.fitBounds(categories[defaultCategoryTitle].category.layer.getBounds());
 
   map.on('zoomstart zoom zoomend', function(ev){
-    // console.log('Zoom level: ' + map.getZoom())
+    console.log('Zoom level: ' + map.getZoom())
     var multiplier = (map.getZoom() - 5)/2;
+    console.log('Zoom percent:' + multiplier)
     d3.selectAll("h3").style("font-size", multiplier * 1.2 + "em")
     d3.selectAll("h2").style("font-size", multiplier * 1.2 + "em")
   })
@@ -88,3 +115,4 @@ function drawMap(err, corona) {
   }).trigger("resize");
 
 }; //end drawMap function
+
