@@ -83,6 +83,13 @@ function drawMap(err, corona) {
   //fit the map to the extent of the cases layer upon drawing
   map.fitBounds(categories[defaultCategoryTitle].category.layer.getBounds());
 
+  map.on('zoomstart zoom zoomend', function(ev){
+    console.log('Zoom level: ' + map.getZoom())
+    var multiplier = (map.getZoom() - 5)/2;
+    d3.selectAll("h3").style("font-size", multiplier * 1.2 + "em")
+    d3.selectAll("h2").style("font-size", multiplier * 1.2 + "em")
+  })
+
   $(window).on("resize", function() {
     var mapDiv = d3.select("#map");
     if ($(window).width() <= 980) { 
