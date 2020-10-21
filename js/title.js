@@ -24,7 +24,7 @@ function getDateString(yesterday=false) {
   }
   
   if (d.getHours() <= 11 || yesterday) {
-    console.log('yesterday')
+    // console.log('yesterday')
     d.setDate(d.getDate() - 1); 
   }
 
