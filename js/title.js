@@ -28,7 +28,6 @@ function getDateString(yesterday=false) {
     d.setDate(d.getDate() - 1); 
   }
 
-
   var dateString = d.getFullYear() + "-" + `${d.getMonth() + 1}`.padStart(2, "0") + "-" + `${d.getDate()}`.padStart(2, "0");
   return dateString; 
 }
