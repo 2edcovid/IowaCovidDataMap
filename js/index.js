@@ -10,6 +10,10 @@ var map = L.map('map', {
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {  
 }).addTo(map);
 
+var useYesterday = false;
+useYesterday = fallBackToYesterday(getGeoJsonURL());
+var Today = getDate();
+var curDateString = getDateString(Today);
 function loadMap(url) {
   //load the data asynchronously
   d3.queue()

@@ -66,7 +66,6 @@ function getPopup(props, title, name, total) {
   '<br>' + 'Population: ' + props.pop_est_2018 + '</b>' +
   '<br><br>' + title + ': ' + props[name] +
   '<br>Statewide Total: ' + total +
-  '<br>Last Updated: ' + props.last_updated.substring(0, props.last_updated.length - 8) +
   '</h4>';
 };
  
