@@ -14,6 +14,9 @@ var useYesterday = false;
 useYesterday = fallBackToYesterday(getGeoJsonURL());
 var Today = getDate();
 var curDateString = getDateString(Today);
+
+// getSlider();
+
 function loadMap(url) {
   //load the data asynchronously
   d3.queue()
