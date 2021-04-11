@@ -49,20 +49,21 @@ function drawMap(err, corona) {
 
   categories[defaultCategoryTitle] = {name: 'Confirmed', category: null};
   categories['% Cases'] = {name: 'PercentConfirmed', category: null};
+  categories['Vaccines Completed'] = {name: 'VaccineSeriesCompleted', category: null};
+  categories['% Vaccines Completed'] = {name: 'PercentVaccineSeriesCompleted', category: null};
+  categories['Confirmed Hospitalized'] = {name: 'Hospitalized', category: null};
+  categories['% Hospitalized'] = {name: 'PercentHospitalized', category: null};
   categories['Confirmed Deaths'] = {name: 'Deaths', category: null};
   categories['% Deaths'] = {name: 'PercentDeaths', category: null};
   categories['Estimated Active'] = {name: 'Active', category: null};
   categories['% Active'] = {name: 'PercentActive', category: null};
-  categories['Assumed Recovered'] = {name: 'Recovered', category: null};
-  categories['% Recovered'] = {name: 'PercentRecovered', category: null};
   categories['Individuals Tested'] = {name: 'Tested', category: null};
   categories['% Tested'] = {name: 'PercentTested', category: null};
-  categories['Confirmed Hospitalized'] = {name: 'Hospitalized', category: null};
-  categories['% Hospitalized'] = {name: 'PercentHospitalized', category: null};
+  categories['Assumed Recovered'] = {name: 'Recovered', category: null};
+  categories['% Recovered'] = {name: 'PercentRecovered', category: null};
   categories['Vaccines Started'] = {name: 'VaccineSeriesInitiated', category: null};
   categories['% Vaccines Started'] = {name: 'PercentVaccineSeriesInitiated', category: null};
-  categories['Vaccines Completed'] = {name: 'VaccineSeriesCompleted', category: null};
-  categories['% Vaccines Completed'] = {name: 'PercentVaccineSeriesCompleted', category: null};
+
 
   for (var key in categories) {
     if (categories.hasOwnProperty(key)) {    
