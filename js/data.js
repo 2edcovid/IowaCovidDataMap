@@ -1,6 +1,11 @@
 function getTotal(name, data) {
   return ss.sum(data.map(function(feature) {
-    return feature.properties[name];
+    if (!feature.properties[name] || feature.properties[name] == NaN) {
+      return 0;
+    } else {
+      return feature.properties[name];
+    }
+
   }));
 }
 
